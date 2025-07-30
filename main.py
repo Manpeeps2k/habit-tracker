@@ -17,10 +17,19 @@ def load_habits():
     except FileNotFoundError:
         return {}
     
-habits = load_habits
+habits = load_habits()
 
-def save_habits():
-    pass
+def save_habits(habits):  
+    savinghabit = input("save habits?: (yes, no)").lower()
+    if savinghabit == "yes":
+        with open("habits.json", 'w') as f:
+            json.dump(habits, f)
+    elif savinghabit == "no":
+        print("going back to options")
+    else:
+        print("please input either yes or no")
+
+
 
 
 def remove_habit(habits):
@@ -46,29 +55,31 @@ def add_habit(habits):
 
 # adding the different options
 
-while True:
-    print("Habit Tracker")
-    print("1. Add a habit")
-    print("2. Remove a habit")
-    print("3. View your habits")
-    print("4. Save your habit")
-    print("5. Exit the program")
+def main():
+    while True:    
+        print("Habit Tracker")
+        print("1. Add a habit")
+        print("2. Remove a habit")
+        print("3. View your habits")
+        print("4. Save your habit")
+        print("5. Exit the program")
 
-    options = input("please select one of the options: ")
+        options = input("please select one of the options: ")
 
-    if options == "1":
+        if options == "1":
+            print(add_habit())
+        elif options == "2":
+            print(remove_habit())
+        elif options == "3":
+            print(showlist())
+        elif options == "4":
+            print(save_habits())
+        elif options == "5":
+            print("Thank You and Goodbye")
+            break
+        else:
+            print("please input a number")
 
-    elif options == "2":
 
-    elif options == "3":
-
-    elif options == "4":
-
-    elif options == "5":
-        print("Thank You and Goodbye")
-        break
-    else:
-        print("please input a number")
-
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
