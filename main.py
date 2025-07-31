@@ -20,14 +20,8 @@ def load_habits():
 habits = load_habits()
 
 def save_habits(habits):  
-    savinghabit = input("save habits?: (yes, no)").lower()
-    if savinghabit == "yes":
-        with open("habits.json", 'w') as f:
-            json.dump(habits, f)
-    elif savinghabit == "no":
-        print("going back to options")
-    else:
-        print("please input either yes or no")
+    with open("habits.json", 'w') as f:
+        json.dump(habits, f)
 
 
 
@@ -42,11 +36,11 @@ def remove_habit(habits):
     
 
 def add_habit(habits):
-    addedhabit = input("add a habit").strip()
+    addedhabit = input("add a habit: ").strip()
     if addedhabit in habits:
         print("habit name already exists")
     else:
-        habits[addedhabit] = []
+        habits[addedhabit] = [str(date.today())]
         print(f"the habit: {addedhabit} is added.")
     
         
@@ -67,13 +61,19 @@ def main():
         options = input("please select one of the options: ")
 
         if options == "1":
-            print(add_habit())
+            print(add_habit(habits))
         elif options == "2":
-            print(remove_habit())
+            print(remove_habit(habits))
         elif options == "3":
-            print(showlist())
+            print(showlist(habits))
         elif options == "4":
-            print(save_habits())
+            choiceinput = input("save? yes or no: ").lower()
+            if choiceinput == "yes":
+                save_habits(habits)
+            elif choiceinput == "no":
+                print("cancelling")
+
+            
         elif options == "5":
             print("Thank You and Goodbye")
             break
