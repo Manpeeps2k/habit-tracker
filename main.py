@@ -42,11 +42,27 @@ def add_habit(habits):
     else:
         habits[addedhabit] = [str(date.today())]
         print(f"the habit: {addedhabit} is added.")
+
+# checklist
+
+def check_habit(habits):
+    print(habits.key())
+    input_habit = input("type the habit to check off for today")
     
-        
-    
+    if input_habit not in habits:
+        print("no habit found")
+        return
+    else:
+        print(enumerate(habits.key(), 1))
+        cf_input = int(input("Please confirm the habit to be marked"))
+
+        for i, in enumerate(habits.key(i), 1):
+            removed_input = cf_input - 1
+            
 
 
+    
+    
 # adding the different options
 
 def main():
@@ -57,6 +73,7 @@ def main():
         print("3. View your habits")
         print("4. Save your habit")
         print("5. Exit the program")
+        print(f"6. Check of a habit for today {str(date.today())}")
 
         options = input("please select one of the options: ")
 
@@ -72,13 +89,15 @@ def main():
                 save_habits(habits)
             elif choiceinput == "no":
                 print("cancelling")
-
-            
+        elif options == "6":
+            check_habit(habits)    
         elif options == "5":
             print("Thank You and Goodbye")
             break
         else:
             print("please input a number")
+        
+        
 
 
 if __name__ == "__main__":
